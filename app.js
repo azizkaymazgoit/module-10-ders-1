@@ -163,3 +163,161 @@ console.log((suan - yaziTarihi) / (1000 * 60 * 60 * 24)) */
 console.log(suan)
 suan.setMonth(2)
 console.log(suan) */
+
+
+// Promise
+
+// pending = bekleme durumu
+// fullfilled = başarılı durumu 
+// rejected = başarısız durumu
+
+
+// ali'nin doğum günü partisi var
+// poly pasta yapma sözü verdi
+// sözü tutacak mı diye bekliyoruz
+// poly hasta oldu - poly sağlıklı
+// poly sağlıklı = doğum gününde pasta var
+// poly hastalandı = doğum günü pastasız yapıldı
+
+/*const polySaglikliMi = true;
+
+const sozVerildiPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        if(polySaglikliMi) {
+            resolve("Poly sağlıklı, pasta yaptı.")
+        }else {
+            reject("Poly hastalandı malesef pasta yok.")
+        }
+    }, 2000)
+});
+
+// then = olumlu sonucu yakalayan metod
+// catch = olumsuz sonucu yakalayan metod
+
+sozVerildiPromise
+.then((sonuc) => {
+    console.log(sonuc)
+})
+.catch((hata) => {
+    console.log(hata)
+})
+.finally(() => {
+    console.log("parti başlasın")
+}) */
+
+
+/* const promise = new Promise((res, rej) => {
+    res(10)
+})
+
+promise
+.then((sonuc) => {
+    console.log("then1: ", sonuc)
+    return sonuc
+})
+.then((data) => {
+    const toplam = data * 2
+    console.log("then2: ", toplam)
+}) */
+
+// api key buraya al
+/* const apikey = "52238d7fab5c2c01b99e751619dd16ec";
+
+// hangi api url'e istek atmam gerekioyr
+const apidil = "tr-TR"
+
+const apiurl = `https://api.themoviedb.org/3/movie/popular?page=1&api_key=${apikey}&language=${apidil}`;
+
+
+const istekAt = fetch(apiurl)
+.then((sonuc) => {
+    return data = sonuc.json()
+})
+.then((data2) => {
+    console.log(data2)
+}) */
+
+
+/* const storyGetirPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res("Storyler")
+    }, 10000)
+})
+
+const resimleriGetirPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res("Resimler")
+    }, 3000)
+})
+
+const videolariGetirPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        rej("Videolar")
+    }, 4000)
+}) */
+
+/* Promise.all([storyGetirPromise, resimleriGetirPromise, videolariGetirPromise])
+.then((sonuc) => {
+    console.log(sonuc)
+})
+.catch((hata) => {
+    console.log(hata)
+}) */
+
+
+/* Promise.allSettled([storyGetirPromise, resimleriGetirPromise, videolariGetirPromise])
+.then((sonuc) => {
+    console.log(sonuc)
+})
+.catch((hata) => {
+    console.log(hata)
+}) */
+
+/* Promise.race([storyGetirPromise, resimleriGetirPromise, videolariGetirPromise])
+.then((sonuc) => {
+    console.log(sonuc)
+})
+.catch((hata) => {
+    console.log(hata)
+}) */
+
+/* 
+const startBtn = document.querySelector('.start-btn');
+const container = document.querySelector('.container');
+const result = document.querySelector('.result');
+
+startBtn.addEventListener('click', handleStart);
+
+function handleStart() {
+
+  const promises = [...container.children].map(() => {
+    
+    return new Promise((resolve, reject) => {
+      const random = Math.random();
+      if (random > 0.5) {
+        resolve('🤑');
+      } else {
+        reject('👿');
+      }
+    });
+
+  });
+
+  Promise.allSettled(promises).then(items => {
+
+    console.log(items)
+    
+    const isWinner = items.every(item => item.status === 'fulfilled') || items.every(item => item.status === 'rejected');
+    
+    items.forEach((item, i) => {
+      container.children[i].textContent = '';
+      setTimeout(() => {
+        container.children[i].textContent = item.value || item.reason;
+        if (i === items.length - 1) {
+          result.innerHTML = `${ isWinner ? 'Winner' : 'Loser' }`;
+        }
+      }, 1000 * (i + 1));
+    });
+  });
+
+} */
