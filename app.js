@@ -321,3 +321,90 @@ function handleStart() {
   });
 
 } */
+
+
+
+// fetch - promise 
+
+
+const userListEl = document.querySelector(".user-list");
+const pEl = document.querySelector("p");
+
+
+
+/* const options = {
+    method: "GET",
+    headers: {
+        "X-Aziz": "Kaymaz",
+        "Content-Type": "application/json",
+        "Accept": "application/xml"
+    },
+    body: JSON.stringify({
+        username: "azizkaymaz",
+        password: "123456"
+    })
+} */
+
+/* const parametreler = new URLSearchParams({
+    _limit: 3,
+    _sort: "name"
+})
+
+const url = `https://jsonplaceholder.typicode.com/users?${parametreler}`;
+
+//fetch(url, options)
+fetch(url)
+.then(res => res.json())
+.then((data) => {
+
+
+    let icerik = "";
+
+    data.forEach(user => {
+        icerik += `<li>${user.name}</li>`
+    });
+
+    userListEl.innerHTML = icerik
+
+})
+.finally(() => {
+    pEl.style.display = "none";
+}) */
+
+function fetchPokemon(pokemonId) {
+  return fetch(`https://pokeapi.co/api/v2/pokemon/${ pokemonId }`).then(response => response.json());
+}
+
+const cardContainer = document.querySelector('.card-container');
+const searchForm = document.querySelector('.search-form');
+
+searchForm.addEventListener('submit', onSearch);
+
+function onSearch(e) {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const searchQuery = form.elements.query.value;
+  fetchPokemon(searchQuery).then(renderPokemonCard).catch(onFetchError).finally(form.reset);
+}
+
+function renderPokemonCard({name, sprites, weight, height, abilities}) {
+  const abilityListItems = abilities.map(ability => `<li class="list-group-item">${ ability.name }</li>`).join('');
+  const markup = `<div class="card">
+   <div class="card-img-top">
+     <img src="${ sprites.front_default }" alt="${ name }">
+   </div>
+   <div class="card-body">
+     <h2 class="card-title">İsim: ${ name }</h2>
+     <p class="card-text">Ağırlık: ${ weight }</p>
+     <p class="card-text">Büyüme: ${ height }</p>
+
+     <p class="card-text"><b>Yetenek</b></p>
+     <ul class="list-group">${ abilityListItems }</ul>
+   </div>
+</div>`;
+  cardContainer.innerHTML = markup;
+}
+
+function onFetchError(error) {
+  alert('Üzgünüz, bir hata oluştu ve Pokemonunuzu bulamadık!');
+}
