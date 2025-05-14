@@ -327,8 +327,8 @@ function handleStart() {
 // fetch - promise 
 
 
-const userListEl = document.querySelector(".user-list");
-const pEl = document.querySelector("p");
+/* const userListEl = document.querySelector(".user-list");
+const pEl = document.querySelector("p"); */
 
 
 
@@ -371,7 +371,7 @@ fetch(url)
     pEl.style.display = "none";
 }) */
 
-function fetchPokemon(pokemonId) {
+/* function fetchPokemon(pokemonId) {
   return fetch(`https://pokeapi.co/api/v2/pokemon/${ pokemonId }`).then(response => response.json());
 }
 
@@ -407,4 +407,4 @@ function renderPokemonCard({name, sprites, weight, height, abilities}) {
 
 function onFetchError(error) {
   alert('Üzgünüz, bir hata oluştu ve Pokemonunuzu bulamadık!');
-}
+} */
