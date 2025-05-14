@@ -408,3 +408,4 @@ function renderPokemonCard({name, sprites, weight, height, abilities}) {
 function onFetchError(error) {
   alert('Üzgünüz, bir hata oluştu ve Pokemonunuzu bulamadık!');
 } */
+
