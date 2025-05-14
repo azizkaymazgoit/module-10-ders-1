@@ -14,6 +14,44 @@
   </head>
   <body>
 
+    <header>
+      <h1>Kütüphane</h1>
+    </header>
+
+    <div class="container">
+      <div class="book-list">
+        <h2>Kitaplar</h2>
+        <ul class="books">
+        </ul>
+      </div>
+
+      <div class="form-container">
+        <h2>Yeni Kitap Ekle</h2>
+        <form id="bookForm">
+          <label for="kitapadi">Kitap Adı</label>
+          <input type="text" id="kitapadi" name="kitapadi" required />
+
+          <label for="yazar">Yazar</label>
+          <input type="text" id="yazar" name="yazar" required />
+
+          <label for="puan">Puan (0-5)</label>
+          <input
+            type="number"
+            id="puan"
+            name="puan"
+            min="0"
+            max="5"
+            required
+          />
+
+          <label for="yil">Yıl</label>
+          <input type="number" id="yil" name="yil" required />
+
+          <input type="submit" value="Kitap Ekle" />
+        </form>
+      </div>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>

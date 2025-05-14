@@ -409,3 +409,124 @@ function onFetchError(error) {
   alert('Üzgünüz, bir hata oluştu ve Pokemonunuzu bulamadık!');
 } */
 
+
+// GET /kitaplar -- tüm kitapları listele
+// GET /kitaplar/:id -- tek kitap datası
+// POST /kitaplar
+// PUT /kitaplar/:id
+// DELETE /kitaplar/:id
+
+
+/*
+<li>
+    <span>Kitap Adı:</span> Beyaz Diş <br />
+    <span>Yazar:</span> Jack London <br />
+    <span>Puan:</span> 4.5 <br />
+    <span>Yıl:</span> 1903
+</li>
+*/
+
+
+const base_url = "https://6824ca300f0188d7e72ad159.mockapi.io/api/v1"
+
+
+// kitapları listele
+const ulEl = document.querySelector(".books");
+const kitaplariGetir = () => {
+    fetch(`${base_url}/kitaplar`)
+    .then(res => res.json())
+    .then(kitaplar => {
+        
+        let icerik = "";
+
+        kitaplar.forEach(kitap => {
+
+            let date = new Date(kitap.yil);
+            date = date.getFullYear();
+
+            icerik += `
+                <li>
+                    <span>Kitap Adı:</span> ${kitap.kitapadi} <br />
+                    <span>Yazar:</span> ${kitap.yazar} <br />
+                    <span>Puan:</span> ${kitap.puan} <br />
+                    <span>Yıl:</span> ${date} <br />
+                    <span data-id="${kitap.id}" style="color: red; cursor: pointer;">Sil</span>
+                </li>
+            `;
+        });
+
+        ulEl.innerHTML = icerik
+
+
+    })
+}
+
+kitaplariGetir();
+
+
+// kitap oluştur
+
+const kitapOlustur = (formDatasi) => {
+
+    const opt = {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(formDatasi)
+    }
+
+    fetch(`${base_url}/kitaplar`, opt).then(res => {
+        if(res.ok) {
+            kitaplariGetir()
+        }
+    })
+}
+
+
+const formEl = document.querySelector("#bookForm");
+
+formEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(formEl)
+
+    const formPostData = {
+        kitapadi: formData.get("kitapadi"),
+        yazar: formData.get("yazar"),
+        puan: formData.get("puan"),
+        yil: formData.get("yil")
+    }
+
+    kitapOlustur(formPostData);
+
+})
+
+
+
+// kitap sil
+const dataSil = (id) => {
+    
+    const opt = {
+        method: "DELETE"
+    }
+
+    fetch(`${base_url}/kitaplar/${id}`, opt).then(res => {
+        if(res.ok) {
+            kitaplariGetir()
+        }
+    })
+
+}
+
+const container = document.querySelector(".container")
+
+container.addEventListener("click", (e) => {
+    
+    const id = e.target.dataset.id;
+
+    if(id) {
+        dataSil(id);
+    }
+
+})
